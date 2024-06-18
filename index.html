@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SAÉ</title>
+</head>
+<body>
+<main id="main">
+
+</main>
+
+<script id="listEntreeTemplate" type="text/x-handlebars-template">
+	<section id="list">
+    <select id="select">
+      <option value=""></option>
+      <option value="/api/entrees?sort=nom-asc">Aucun tri</option>
+      {{#each services}}
+        <option value="{{this.links.collections.href}}">{{this.service.nom}}</option>
+      {{/each}}
+    </select>
+    <h2>{{tri}}</h2>
+    {{#if entrees}}
+      {{#each entrees}}
+        <h4>{{this.entree.lastName}} {{this.entree.firstName}}</h4> 
+        <button class="voir" url="{{this.links.self.href}}">Voir</button>
+        <p>Services :</p>
+        <ul>
+          {{#each this.entree.services}}
+            <li>{{this}}</li>
+          {{/each}}
+        </ul>
+      {{/each}}
+    {{else}}
+    <p>Aucune entrée dans ce service</p>
+    <button id="home">Home</button>
+    {{/if}}
+	 </section>
+</script>
+
+<script id="entreeTemplate" type="text/x-handlebars-template">
+	<section id="entree">
+    {{#if image}}
+		  <img src="{{image}}">
+      {{else}}
+      <p>{{initiales.nom}}{{initiales.prenom}}</p>
+    {{/if}}
+    <h4>{{data.lastName}} {{data.firstName}}</h4>
+    <p>Fonction : {{data.fonction}}</p>
+    <p>Numéro de bureau : {{data.numBureau}}</p>
+    <p>Services :</p>
+    <ul>
+      {{#each services}}
+        <li>{{this}}</li>
+      {{/each}}
+    </ul>
+    <h4>Informations de contact</h4>
+    <div>
+      <a href="mailto:{{data.email}}">{{data.email}}</a>
+      <a href="tel:{{data.telMobile}}">{{data.telMobile}}</a>
+      <a href="tel:{{data.telFixe}}">{{data.telFixe}}</a>
+    </div>
+    <button id="home">Home</button>
+	 </section>
+</script>
+
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script  src='./js/index.js' defer ></script>
+</body>
+</html>
